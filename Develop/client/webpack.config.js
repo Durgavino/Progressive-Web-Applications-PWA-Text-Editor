@@ -21,8 +21,7 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: './index.html',
         title: 'Text Editor'
-      })
-    ],
+      }),   
 
     new InjectManifest({
       swSrc: './src-sw.js',
@@ -40,11 +39,13 @@ module.exports = () => {
       inject:true,
       icons: [
         {
-          src: "/images/logo.png",
-          type: "image/png",
-        }]
+          src: path.resolve('src/images/logo.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          destination: path.join('assets', 'icons'),
+        },
+      ],
     }),
-
+  ],
 
     module: {
       rules: [
