@@ -18,12 +18,52 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        title: 'Text Editor'
+      })
     ],
+
+    new InjectManifest({
+      swSrc: './src-sw.js',
+      swDest: 'src-sw.js',
+    }),
+
+    new WebpackPwaManifest({
+      name: "Text Editor",
+      short_name: "Jate_textEditor",
+      start_url: "./index.html",
+      display: "standalone",
+      background_color: "#392e4a",
+      theme_color: "#16453e",
+      orientation: "portrait-primary",
+      inject:true,
+      icons: [
+        {
+          src: "/images/logo.png",
+          type: "image/png",
+        }]
+    }),
+
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },
+
       ],
     },
   };
