@@ -24,7 +24,7 @@ console.log('Data saved to the Database',result);
 
 // TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () => {
-  console.log('getDb  implemented');
+  console.log('getDb implemented');
 const txtEditDb=await openDB('jate',1);
 const tx=txtEditDb.transaction('jate','readonly');
 const store=tx.objectStore('jate');
